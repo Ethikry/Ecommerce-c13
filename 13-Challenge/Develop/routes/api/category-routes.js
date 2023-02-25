@@ -14,12 +14,13 @@ router.get("/", (req, res) => {
         attributes: ["id", "product_name", "price", "stock", "category_id"],
       },
     ],
-  }).then(function (data) {
-    (err, res) => {
-      if (err) throw err;
-      res.JSON(data);
-    };
-  });
+  })
+    .then((category) => {
+      res.json(category);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 router.get("/:id", (req, res) => {
@@ -33,22 +34,23 @@ router.get("/:id", (req, res) => {
         attributes: ["id", "product_name", "price", "stock", "category_id"],
       },
     ],
-  }).then(function (data) {
-    (err, res) => {
-      if (err) throw err;
-      res.JSON(data);
-    };
-  });
+  })
+    .then((category) => {
+      res.json(category);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 router.post("/", (req, res) => {
   // create a new category
-  Category.create(req.body).then(function (data) {
-    (err, res) => {
-      if (err) throw err;
-      res.status(200).JSON(data);
-    };
-  });
+  Category.create(req.body)
+    .then((category) => res.status(200).json(category))
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
 });
 
 router.put("/:id", (req, res) => {
@@ -58,12 +60,10 @@ router.put("/:id", (req, res) => {
       id: req.params.id,
     },
   })
-    .then(Category.findByPk(req.params.id))
-    .then(function (data) {
-      (err, res) => {
-        if (err) throw err;
-        res.status(200).JSON(data);
-      };
+    .then((data) => Category.findByPk(req.params.id))
+    .then((category) => res.status(200).json(category))
+    .catch((err) => {
+      res.json(err);
     });
 });
 
@@ -73,12 +73,13 @@ router.delete("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-  }).then(function (data) {
-    (err, res) => {
-      if (err) throw err;
-      res.JSON(`${data} was destroyed.`);
-    };
-  });
+  })
+    .then((data) => {
+      res.json("Category removed from database");
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 module.exports = router;
