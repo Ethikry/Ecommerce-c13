@@ -17,7 +17,7 @@
   ## Installation
   To install this project, clone this repo and install the necessary packages.
   ## Usage
-  Once all other packages have been installed, you can start the database and seed. Use Insomnia or Postman to make requests to test the app out.
+  Once all other packages have been installed, you can start the database and seed. Use Insomnia or Postman to make requests to test the app out. An instructional walkthrough video using Insomnia is provided here: https://youtu.be/NOZvexww9lw
   ## Contributions
   Not accepting contributions.
   ## Tests 
